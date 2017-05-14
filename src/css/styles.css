@@ -1,3 +1,50 @@
+* {
+  box-sizing: border-box; }
 
+body {
+  background-color: #fff;
+  color: #FFF;
+  font-family: 'Unica One', cursive;
+  font-size: 1.2rem; }
+
+.landing {
+  width: 80%;
+  height: 100vh;
+  background-color: #fff;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; }
+
+.logo {
+  width: 400px;
+  margin-bottom: 100px; }
+
+.links {
+  display: flex; }
+
+.enter, .join {
+  text-decoration: none;
+  color: #6D6875;
+  border: 1px solid #6D6875;
+  padding: 15px;
+  font-size: 1rem;
+  margin: 10px;
+  background-color: transparent;
+  transition: all 1s ease; }
+  .enter:hover, .join:hover {
+    background-image: linear-gradient(-225deg, #FF057C 0%, #8D0B93 50%, #321575 100%);
+    background-image: linear-gradient(-225deg, #FF057C 0%, #8D0B93 50%, #321575 100%);
+    color: #FFF;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+    border: none; }
+
+label {
+  color: #000; }
+
+.filters canvas {
+  width: 15%; }
 
 /*# sourceMappingURL=styles.css.map */

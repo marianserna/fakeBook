@@ -9,7 +9,8 @@
     "re-base": "^2.7.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "react-router-dom": "^4.1.1"
+    "react-router-dom": "^4.1.1",
+    "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
     "concurrently": "^3.4.0",
