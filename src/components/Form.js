@@ -2,6 +2,8 @@ import React from 'react';
 import base from '../base';
 import CircleFilter from './CircleFilter';
 import TextFilter from './TextFilter';
+import DesandroFilter from './DesandroFilter';
+import UnaFilter from './UnaFilter';
 
 // import { Link } from 'react-router-dom';
 import { TweenMax } from 'gsap';
@@ -83,6 +85,8 @@ export default class Form extends React.Component {
             <div className="filters">
               <CircleFilter photo={this.state.user.photo} />
               <TextFilter photo={this.state.user.photo} text={'Hello!'} />
+              <UnaFilter photo={this.state.user.photo} />
+              <DesandroFilter photo={this.state.user.photo} />
             </div>
 
             <button type="submit">Post Profile</button>
