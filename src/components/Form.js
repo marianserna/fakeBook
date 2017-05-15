@@ -65,17 +65,42 @@ export default class Form extends React.Component {
     e.preventDefault();
     const id = sessionStorage.getItem('id');
 
-    base.update(`users/${id}`, {
-      data: {
-        name: this.name.value,
-        description: this.description.value,
-        title: this.state.title,
-        linkedin: this.linkedin.value,
-        filter: this.state.chosenFilter
-      }
-    }).then(() => {
-      this.props.history.push('/grid');
+    this.updateImage().then((url) => {
+      base.update(`users/${id}`, {
+        data: {
+          name: this.name.value,
+          description: this.description.value,
+          title: this.state.title,
+          linkedin: this.linkedin.value,
+          filter: this.state.chosenFilter,
+          photo: url
+        }
+      }).then(() => {
+        this.props.history.push('/grid');
+      });
     });
+  }
+
+  updateImage = () => {
+    const id = sessionStorage.getItem('id');
+
+    const promise = new Promise((resolve, reject) => {
+      if (!this.state.newImage) {
+        return resolve(this.state.user.photo);
+      }
+      // create a reference to firebase storage
+      const storageRef = base.storage().ref();
+      // create a reference to the img that will be uploaded
+      const imgRef = storageRef.child(`${id}.jpg`);
+      // get a ref to the input for the image and access the actual file that the person is trying to upload(files[0])
+      imgRef.put(this.newImage.files[0]).then((snapshot) => {
+        // to be able to show the image, you need to get its url by calling getDownloadURL (imgUrl refers to the img url in firebase)
+        imgRef.getDownloadURL().then((imgUrl) => {
+          resolve(imgUrl);
+        });
+      });
+    });
+    return promise;
   }
 
   render() {
