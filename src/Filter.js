@@ -6,9 +6,9 @@ import tinycolor from 'tinycolor2';
 
 export default class Filter {
   constructor(canvas, options) {
-    console.log(canvas);
     this.canvas = canvas;
 
+    this.rendered = false;
     this.img = null;
     this.imageWidth = this.canvas.offsetWidth;
     this.imageHeight = null;
@@ -43,7 +43,9 @@ export default class Filter {
       this.drawImage();
       this.captureImgData();
       this.createShapes();
-      this.render();
+      if (!this.rendered) {
+        this.render();
+      }
     });
   }
 
@@ -71,6 +73,7 @@ export default class Filter {
   }
 
   createShapes() {
+    this.shapes = [];
 
     if (this.options.filter === 'circle') {
       const radius = 5;
@@ -102,6 +105,7 @@ export default class Filter {
   }
 
   render() {
+    this.rendered = true;
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     this.drawImage();

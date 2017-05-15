@@ -29,7 +29,9 @@ export default class Form extends React.Component {
     }).then(data => {
       this.setState({
         loading: false,
-        user: data
+        user: data,
+        chosenFilter: data.filter,
+        title: data.title
       });
     });
   }
@@ -59,6 +61,23 @@ export default class Form extends React.Component {
     });
   }
 
+  submitProfile = (e) =>{
+    e.preventDefault();
+    const id = sessionStorage.getItem('id');
+
+    base.update(`users/${id}`, {
+      data: {
+        name: this.name.value,
+        description: this.description.value,
+        title: this.state.title,
+        linkedin: this.linkedin.value,
+        filter: this.state.chosenFilter
+      }
+    }).then(() => {
+      this.props.history.push('/grid');
+    });
+  }
+
   render() {
     if (this.state.loading) {
       return(
@@ -70,7 +89,7 @@ export default class Form extends React.Component {
 
     return (
       <div>
-        <div className="Form">
+        <div className="Form" onSubmit={(e) => this.submitProfile(e)}>
           <form>
             <div className="input-row">
               <span className="input-wrapper">
@@ -82,7 +101,7 @@ export default class Form extends React.Component {
             <div className="input-row">
               <span className="input-wrapper">
                 <label className="input-label" htmlFor="description">Description</label>
-                <input className="input-field" type="text" id="description" name="description" required ref={(input) => this.description = input}/>
+                <input className="input-field" type="text" id="description" name="description" defaultValue={this.state.user.description} required ref={(input) => this.description = input}/>
               </span>
             </div>
 
@@ -94,7 +113,7 @@ export default class Form extends React.Component {
             <div className="input-row">
               <span className="input-wrapper">
                 <label className="input-label" htmlFor="linkedin">LinkedIn</label>
-                <input className="input-field" type="url" id="linkedin" name="linkedin" required ref={(input) => this.linkedin = input}/>
+                <input className="input-field" type="url" id="linkedin" name="linkedin" defaultValue={this.state.user.linkedin} required ref={(input) => this.linkedin = input}/>
               </span>
             </div>
 
@@ -104,7 +123,7 @@ export default class Form extends React.Component {
 
             <div className="input-row">
               <span className="input-wrapper">
-                <input className="input-field" type="file" id="change-img" name="change-img" required ref={(input) => this.newImage = input} onChange={(e) => this.changeImage(e)} />
+                <input className="input-field" type="file" id="change-img" name="change-img" ref={(input) => this.newImage = input} onChange={(e) => this.changeImage(e)} />
                 <label className="input-label" htmlFor="change-img">Change Image</label>
               </span>
             </div>

@@ -7,9 +7,19 @@ export default class CircleFilter extends React.Component {
       filter: 'circle'
     });
 
+    this.filterPhoto(this.props.photo);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.photo !== this.props.photo) {
+      this.filterPhoto(nextProps.photo);
+    }
+  }
+
+  filterPhoto(photo) {
     const img = new Image();
     img.crossOrigin = "Anonymous";
-    img.src = this.props.photo;
+    img.src = photo;
 
     this.filter.filter(img);
   }
