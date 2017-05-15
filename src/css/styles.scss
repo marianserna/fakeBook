@@ -60,6 +60,28 @@ label {
   color: #000;
 }
 
+.filters {
+  width: 50%;
+}
+
+.filters p {
+  color: #000;
+}
+
+.filter {
+  width: 25%;
+  display: inline-block;
+  border: 5px solid transparent;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.chosen {
+  border: 5px solid #FF057C;
+}
+
 .filters canvas, .filters img {
-  width: 15%;
+  width: 100%;
 }
