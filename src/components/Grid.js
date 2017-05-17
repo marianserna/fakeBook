@@ -11,8 +11,12 @@ export default class Grid extends React.Component {
     base.fetch('users', {
       context: this
     }).then((users) => {
-      const canvasGrid = new CanvasGrid(this.gridContainer, users);
+      const canvasGrid = new CanvasGrid(this.gridContainer, users, this.redirectToProfile);
     });
+  }
+
+  redirectToProfile = (userId) => {
+    this.props.history.push(`/grid/${userId}`);
   }
 
   render() {

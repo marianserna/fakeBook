@@ -1,9 +1,11 @@
 export default class CanvasGrid {
-  constructor(gridContainer, users) {
+  constructor(gridContainer, users, redirectToProfile) {
     this.gridContainer = gridContainer;
     this.users = Object.keys(users).map((key) => {
+      users[key].id = key;
       return users[key];
     });
+    this.redirectToProfile = redirectToProfile;
 
     this.canvas = document.createElement('canvas');
     this.canvas.width = window.innerWidth;
@@ -99,13 +101,13 @@ export default class CanvasGrid {
       col: col,
       width: options[randomOption].width,
       height: options[randomOption].height,
-      image: this.images[this.currentImage]
+      image: this.images[this.currentImage],
+      user: this.users[this.currentImage]
     }
 
     this.gridImages.push(gridImage);
 
     this.currentImage += 1;
-
     if (this.currentImage === this.images.length) {
       this.currentImage = 0;
     }
@@ -205,8 +207,8 @@ export default class CanvasGrid {
       const row = Math.floor(e.clientY / this.squareSize);
       const col = Math.floor(e.clientX / this.squareSize);
 
-      // console.log(this.grid[row][col]);
-
+      const gridImage = this.grid[row][col];
+      this.redirectToProfile(gridImage.user.id);
     });
   }
 
