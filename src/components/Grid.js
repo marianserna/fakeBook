@@ -17,7 +17,7 @@ export default class Grid extends React.Component {
 
   render() {
     return (
-      <div className="grid-container" ref={(div) => this.gridContainer = div}></div>
+      <div className="grid-container moon" ref={(div) => this.gridContainer = div}></div>
     );
   }
 }

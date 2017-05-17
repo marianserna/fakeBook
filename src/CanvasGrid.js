@@ -27,6 +27,7 @@ export default class CanvasGrid {
     this.images = this.users.map((user) => {
       const image = new Image();
       image.src = user.photo;
+      image.crossOrigin = "Anonymous";
       return image;
     });
 
@@ -122,6 +123,7 @@ export default class CanvasGrid {
 
   render = () => {
     this.drawImages();
+    // this.grayscaling();
     requestAnimationFrame(this.render);
   }
 
@@ -138,6 +140,23 @@ export default class CanvasGrid {
     });
   }
 
+  // http://spyrestudios.com/html5-canvas-image-effects-black-white/
+  // & http://www.html5canvastutorials.com/advanced/html5-canvas-grayscale-image-colors-tutorial/
+  // grayscaling = () => {
+  //   const imageData = this.context.getImageData(0, 0, window.innerWidth, window.innerHeight);
+  //
+  //   for (let i = 0; i < imageData.data.length; i += 4) {
+  //     const brightness = 0.3 * imageData.data[i] + 0.59 * imageData.data[i + 1] + 0.11 * imageData.data[i + 2];
+  //     // red
+  //     imageData.data[i] = brightness;
+  //     // green
+  //     imageData.data[i + 1] = brightness;
+  //     // blue
+  //     imageData.data[i + 2] = brightness;
+  //   }
+  //   this.context.putImageData(imageData, 0, 0);
+  // }
+
   /**
  * By Ken Fyrstenberg Nilsen (http://stackoverflow.com/questions/21961839/simulation-background-size-cover-in-canvas)
  *
@@ -145,6 +164,8 @@ export default class CanvasGrid {
  *
  * If image and context are only arguments rectangle will equal canvas
 */
+
+  // Simulating background cover so that the images are centered to cover the square and they aren't stretched
   drawImageProp = (ctx, img, x, y, w, h) => {
     const offsetX = 0.5;
     const offsetY = 0.5;

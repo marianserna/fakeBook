@@ -1,6 +1,7 @@
 // https://github.com/una/CSSgram
 
 @import 'filters/1977';
+@import 'filters/moon';
 
 * {
   box-sizing: border-box;
@@ -196,3 +197,11 @@ form {
 .filters canvas, .filters img {
   width: 100%;
 }
+
+
+// -------------> GRID
+
+// .grid-container canvas {
+//   -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+//   filter: grayscale(100%);
+// }
