@@ -110,11 +110,22 @@ export default class Landing extends Component {
     this.props.history.push('/form');
   }
 
+  redirectToGrid = (e) => {
+    e.preventDefault();
+    this.props.history.push('/grid');
+  }
+
   render() {
     return (
       <div className="landing">
+        <div className="login">
+          <a className="join" href="#" onClick={(e) => this.redirectToGrid(e)}>
+            PROFILE
+          </a>
+        </div>
+
         <div className="fakebook">
-          <img className="logo" src="logo.svg" alt="logo"/>
+          <img className="logo" src="logo3.svg" alt="logo"/>
         </div>
 
         <div className="links">

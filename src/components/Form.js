@@ -5,6 +5,8 @@ import TextFilter from './TextFilter';
 import DesandroFilter from './DesandroFilter';
 import UnaFilter from './UnaFilter';
 
+// import { Button, Card, Row, Col } from './react-materializecss';
+
 // import { Link } from 'react-router-dom';
 import { TweenMax } from 'gsap';
 
@@ -30,8 +32,8 @@ export default class Form extends React.Component {
       this.setState({
         loading: false,
         user: data,
-        chosenFilter: data.filter,
-        title: data.title
+        chosenFilter: data.filter || this.state.chosenFilter,
+        title: data.title || this.state.title
       });
     });
   }
@@ -113,44 +115,18 @@ export default class Form extends React.Component {
     }
 
     return (
-      <div>
-        <div className="Form" onSubmit={(e) => this.submitProfile(e)}>
-          <form>
-            <div className="input-row">
-              <span className="input-wrapper">
-                <label className="input-label" htmlFor="name">Name</label>
-                <input className="input-field" type="text" id="name" name="name" defaultValue={this.state.user.name} required ref={(input) => this.name = input}/>
-              </span>
-            </div>
-
-            <div className="input-row">
-              <span className="input-wrapper">
-                <label className="input-label" htmlFor="description">Description</label>
-                <input className="input-field" type="text" id="description" name="description" defaultValue={this.state.user.description} required ref={(input) => this.description = input}/>
-              </span>
-            </div>
-
-            <select className="input-row" name="title" onChange={(e) => {this.onTitleChange(e)}}>
-              <option value="Designer">Designer</option>
-              <option value="Developer">Developer</option>
-            </select>
-
-            <div className="input-row">
-              <span className="input-wrapper">
-                <label className="input-label" htmlFor="linkedin">LinkedIn</label>
-                <input className="input-field" type="url" id="linkedin" name="linkedin" defaultValue={this.state.user.linkedin} required ref={(input) => this.linkedin = input}/>
-              </span>
-            </div>
-
+      <div className="form-container">
+        <div className="profile-image">
+          <div className="image-and-filters">
             <div className="profile-img">
-              <img src={this.state.newImage || this.state.user.photo} alt="profile image"/>
+              <img className="big-img" src={this.state.newImage || this.state.user.photo} alt="profile image"/>
             </div>
 
-            <div className="input-row">
-              <span className="input-wrapper">
-                <input className="input-field" type="file" id="change-img" name="change-img" ref={(input) => this.newImage = input} onChange={(e) => this.changeImage(e)} />
-                <label className="input-label" htmlFor="change-img">Change Image</label>
-              </span>
+            <div className="row">
+              <div className="input-field">
+                <label className="input-label" htmlFor="change-img">Choose a file</label>
+                <input className="inputfile" type="file" id="change-img" name="change-img" ref={(input) => this.newImage = input} onChange={(e) => this.changeImage(e)} />
+              </div>
             </div>
 
             <div className="filters">
@@ -170,6 +146,41 @@ export default class Form extends React.Component {
 
               <div className={`filter ${this.state.chosenFilter === 'desandro' ? 'chosen' : ''}`} onClick={(e) => this.changeFilter(e, 'desandro')}>
                 <DesandroFilter photo={this.state.newImage || this.state.user.photo} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="form-inner" onSubmit={(e) => this.submitProfile(e)}>
+          <form>
+            <div className="row">
+              <div className="input-field">
+                <label className="input-label" htmlFor="name">Name</label>
+                <input className="input" type="text" id="name" name="name" defaultValue={this.state.user.name} required ref={(input) => this.name = input}/>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="input-field">
+                <label className="input-label" htmlFor="description">Description</label>
+                <input className="input" type="text" id="description" name="description" defaultValue={this.state.user.description} required ref={(input) => this.description = input}/>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="input-field">
+                <label className="input-label" htmlFor="title">Title</label>
+                <select className="input-field" name="title" id="title" onChange={(e) => {this.onTitleChange(e)}} defaultValue={this.state.user.title}>
+                  <option value="Designer">Designer</option>
+                  <option value="Developer">Developer</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="input-field">
+                <label className="input-label" htmlFor="linkedin">LinkedIn</label>
+                <input className="input" type="url" id="linkedin" name="linkedin" defaultValue={this.state.user.linkedin} required ref={(input) => this.linkedin = input}/>
               </div>
             </div>
 
