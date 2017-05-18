@@ -126,6 +126,21 @@ body {
     background-color: transparent;
     box-shadow: none; }
 
+.legend {
+  position: absolute;
+  bottom: 2%;
+  z-index: 50; }
+  .legend p {
+    color: #6D6875;
+    font-size: 0.8rem;
+    text-align: center;
+    line-height: 1rem; }
+    .legend p a {
+      text-decoration: none;
+      color: #CC208E; }
+  .legend .smaller-text {
+    font-size: 0.6rem; }
+
 .form-container {
   width: 80vw;
   height: 100vh;

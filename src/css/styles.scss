@@ -71,6 +71,28 @@ body {
   }
 }
 
+.legend {
+  position: absolute;
+  bottom: 2%;
+  z-index: 50;
+
+  p {
+    color: #6D6875;
+    font-size: 0.8rem;
+    text-align: center;
+    line-height: 1rem;
+
+    a {
+      text-decoration: none;
+      color: #CC208E;
+    }
+  }
+
+  .smaller-text {
+    font-size: 0.6rem;
+  }
+}
+
 
 // ---------------> FORM
 .form-container {

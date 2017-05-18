@@ -1,3 +1,7 @@
+import Hammer from 'hammerjs'
+
+import { TweenMax } from 'gsap';
+
 export default class CanvasGrid {
   constructor(gridContainer, users, redirectToProfile) {
     this.gridContainer = gridContainer;
@@ -18,13 +22,19 @@ export default class CanvasGrid {
       y: 0
     };
 
+    this.delta = {
+      x: 0,
+      y: 0
+    };
+
     this.squareSize = 225;
 
-    this.totalCols = Math.ceil((window.innerWidth / this.squareSize) + 2);
-    this.totalRows = Math.ceil((window.innerHeight / this.squareSize) + 2);
+    this.totalCols = Math.ceil((window.innerWidth / this.squareSize) + 3);
+    this.totalRows = Math.ceil((window.innerHeight / this.squareSize) + 3);
 
     this.grid = {};
-    this.clickImage();
+    // this.clickImage();
+    this.dragCanvas();
 
     this.images = this.users.map((user) => {
       const image = new Image();
@@ -41,13 +51,24 @@ export default class CanvasGrid {
     this.render();
   }
 
+  xMovement = () => {
+    return this.offset.x + this.delta.x;
+  }
+
+  yMovement = () => {
+    return this.offset.y + this.delta.y;
+  }
+
   initializeGrid = () => {
+    const startRow = Math.floor(-this.yMovement() / this.squareSize) - 3;
+    const startCol = Math.floor(-this.xMovement() / this.squareSize) - 3;
+
     // totalRows?? because its based on how many rows there will be
-    for (let row = -2; row <= this.totalRows; row++) {
+    for (let row = startRow; row <= (startRow + this.totalRows); row++) {
       if (this.grid[row] === undefined) {
         this.grid[row] = {};
       }
-      for (let col = -2; col <= this.totalCols; col++) {
+      for (let col = startCol; col <= (startCol + this.totalCols); col++) {
         if (this.grid[row][col] === undefined) {
           this.grid[row][col] = false;
         }
@@ -56,8 +77,11 @@ export default class CanvasGrid {
   }
 
   fillGrid = () => {
-    for (let row = -2; row <= this.totalRows; row++) {
-      for (let col = -2; col <= this.totalCols; col++) {
+    const startRow = Math.floor(-this.yMovement() / this.squareSize) - 3;
+    const startCol = Math.floor(-this.xMovement() / this.squareSize) - 3;
+
+    for (let row = startRow; row <= (startRow + this.totalRows); row++) {
+      for (let col = startCol; col <= (startCol + this.totalCols); col++) {
         // false means there's no img in the current square
         if (this.grid[row][col] === false) {
           this.fillSquare(row, col);
@@ -102,8 +126,11 @@ export default class CanvasGrid {
       width: options[randomOption].width,
       height: options[randomOption].height,
       image: this.images[this.currentImage],
-      user: this.users[this.currentImage]
+      user: this.users[this.currentImage],
+      scale: 0.001
     }
+
+    TweenMax.to(gridImage, 1, {scale: 1, delay: Math.random() / 2});
 
     this.gridImages.push(gridImage);
 
@@ -124,6 +151,7 @@ export default class CanvasGrid {
   }
 
   render = () => {
+    this.context.clearRect(0, 0, window.innerWidth, window.innerHeight);
     this.drawImages();
     // this.grayscaling();
     requestAnimationFrame(this.render);
@@ -131,13 +159,22 @@ export default class CanvasGrid {
 
   drawImages = () => {
     this.gridImages.forEach((gridImage) => {
+
+      const fullWidth = (gridImage.width * this.squareSize);
+      const fullHeight = (gridImage.height * this.squareSize);
+
+      const width = fullWidth * gridImage.scale;
+      const height = fullHeight * gridImage.scale;
+
+      const centeringX = (fullWidth - width) / 2;
+      const centeringY = (fullHeight - height) / 2;
+
+      const x = (gridImage.col * this.squareSize) + this.xMovement() + centeringX;
+      const y = (gridImage.row * this.squareSize) + this.yMovement() + centeringY;
+
       this.drawImageProp(
         this.context,
-        gridImage.image,
-        gridImage.col * this.squareSize,
-        gridImage.row * this.squareSize,
-        gridImage.width * this.squareSize,
-        gridImage.height * this.squareSize
+        gridImage.image, x, y, width, height
       );
     });
   }
@@ -159,15 +196,14 @@ export default class CanvasGrid {
   //   this.context.putImageData(imageData, 0, 0);
   // }
 
-  /**
- * By Ken Fyrstenberg Nilsen (http://stackoverflow.com/questions/21961839/simulation-background-size-cover-in-canvas)
- *
- * drawImageProp(context, image [, x, y, width, height [,offsetX, offsetY]])
- *
- * If image and context are only arguments rectangle will equal canvas
-*/
+
 
   // Simulating background cover so that the images are centered to cover the square and they aren't stretched
+  /**
+ * By Ken Fyrstenberg Nilsen (http://stackoverflow.com/questions/21961839/simulation-background-size-cover-in-canvas)
+ * drawImageProp(context, image [, x, y, width, height [,offsetX, offsetY]])
+ * If image and context are only arguments rectangle will equal canvas
+*/
   drawImageProp = (ctx, img, x, y, w, h) => {
     const offsetX = 0.5;
     const offsetY = 0.5;
@@ -202,14 +238,48 @@ export default class CanvasGrid {
     ctx.drawImage(img, cx, cy, cw, ch, x, y, w, h);
   }
 
-  clickImage = () => {
-    this.canvas.addEventListener('click', (e) => {
-      const row = Math.floor(e.clientY / this.squareSize);
-      const col = Math.floor(e.clientX / this.squareSize);
+  // clickImage = () => {
+  //   this.canvas.addEventListener('click', (e) => {
+  //     const row = Math.floor(e.clientY / this.squareSize);
+  //     const col = Math.floor(e.clientX / this.squareSize);
+  //
+  //     const gridImage = this.grid[row][col];
+  //     this.redirectToProfile(gridImage.user.id);
+  //   });
+  // }
 
-      const gridImage = this.grid[row][col];
-      this.redirectToProfile(gridImage.user.id);
+  // http://codepen.io/jtangelder/pen/ABFnd
+  dragCanvas = () => {
+    const hammer = new Hammer(this.canvas);
+    hammer.get('pan').set({
+      // By default it only does horizontal dragging but by saying direction all, you can do it in every direction.
+      direction: Hammer.DIRECTION_ALL
+    });
+
+    hammer.on('panleft panright panup pandown tap press', (e) => {
+      if(e.type === 'panleft' || e.type === 'panright' || e.type === 'panup' || e.type === 'pandown') {
+        this.delta.x = e.deltaX;
+        this.delta.y = e.deltaY;
+
+        if (e.isFinal) {
+          this.offset.x += this.delta.x;
+          this.offset.y += this.delta.y;
+          this.delta.x = 0;
+          this.delta.y = 0;
+
+          this.initializeGrid();
+          this.fillGrid();
+        }
+      }
+
+      if(e.type === 'tap' || e.type === 'press') {
+        console.log(e);
+        const row = Math.floor((e.srcEvent.clientY - this.yMovement()) / this.squareSize);
+        const col = Math.floor((e.srcEvent.clientX - this.xMovement()) / this.squareSize);
+
+        const gridImage = this.grid[row][col];
+        this.redirectToProfile(gridImage.user.id);
+      }
     });
   }
-
 }

@@ -137,6 +137,13 @@ export default class Landing extends Component {
             ENTER EXPERIENCE
           </Link>
         </div>
+
+        <div className="legend">
+          <p>
+            A shameless copycat of <a href="http://youngcreatives.heed.agency/" target="_blank">Young Creatives</a> by <a href="http://heed.agency/" target="_blank">heed</a> ⤐ One · Is · Curious 😅
+          </p>
+          <p className="smaller-text">Exploring how to build an infinite image grid in canvas</p>
+        </div>
       </div>
     );
   }
