@@ -139,8 +139,6 @@ body {
     .legend p a {
       text-decoration: none;
       color: #CC208E; }
-  .legend .smaller-text {
-    font-size: 0.6rem; }
 
 .form-container {
   display: flex;
@@ -206,13 +204,17 @@ body {
 form {
   width: 70%;
   margin: 0 auto; }
+  @media (max-width: 970px) {
+    form {
+      width: 100%; } }
 
 .form-control {
   font-family: 'Unica One', cursive;
   color: #CC208E;
   border-radius: 0;
   padding: 10px;
-  background-color: #333333; }
+  background: none;
+  border: 1px solid #6D6875; }
 
 label {
   color: #6D6875;

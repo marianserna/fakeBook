@@ -88,10 +88,6 @@ body {
       color: #CC208E;
     }
   }
-
-  .smaller-text {
-    font-size: 0.6rem;
-  }
 }
 
 
@@ -188,6 +184,10 @@ body {
 form {
   width: 70%;
   margin: 0 auto;
+
+  @media(max-width: 970px) {
+    width: 100%;
+  }
 }
 
 .form-control {
@@ -195,7 +195,8 @@ form {
   color: #CC208E;
   border-radius: 0;
   padding: 10px;
-  background-color: #333333;
+  background: none;
+  border: 1px solid #6D6875;
 }
 
 label {
