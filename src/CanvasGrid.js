@@ -1,6 +1,7 @@
 import Hammer from 'hammerjs';
-import { Howl } from 'howler';
 import { TweenMax } from 'gsap';
+
+import click from './click';
 
 export default class CanvasGrid {
   constructor(gridContainer, users, redirectToProfile) {
@@ -40,10 +41,6 @@ export default class CanvasGrid {
       image.src = user.photo;
       image.crossOrigin = "Anonymous";
       return image;
-    });
-
-    this.click = new Howl({
-      src: ['clickEffect.mp3']
     });
 
     this.currentImage = 0;
@@ -276,7 +273,7 @@ export default class CanvasGrid {
       }
 
       if(e.type === 'tap' || e.type === 'press') {
-        this.click.play();
+        click.play();
         const row = Math.floor((e.srcEvent.clientY - this.yMovement()) / this.squareSize);
         const col = Math.floor((e.srcEvent.clientX - this.xMovement()) / this.squareSize);
 

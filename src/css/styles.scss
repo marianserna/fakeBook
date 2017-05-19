@@ -34,8 +34,7 @@ body {
   display: flex;
 }
 
-.enter, .join, form button {
-  text-decoration: none;
+.enter, .join, .btn.btn-secondary, .change-img-label {
   color: #6D6875;
   border: 1px solid #6D6875;
   padding: 15px;
@@ -45,12 +44,14 @@ body {
   font-size: 1.2rem;
   background-color: transparent;
   transition: all 1s ease;
+  border-radius: 0;
 
   &:hover {
     background-image: linear-gradient(-225deg, #FF057C 0%, #8D0B93 50%, #321575 100%);
     color: #FFF;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-    border: none;
+    border-color: #000;
+    text-decoration: none;
   }
 }
 
@@ -95,125 +96,166 @@ body {
 
 
 // ---------------> FORM
+
 .form-container {
-  width: 80vw;
-  height: 100vh;
-  margin: 0 auto;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #000;
-  color: #6D6875;
+  width: 80vw;
+  margin: 0 auto;
+  margin-top: 60px;
 }
 
-.profile-image {
-  width: 50%;
-
-  .big-img {
-    width: 500px;
-    height: 500px;
+@media(max-width: 970px) {
+  .form-container {
+    width: 90vw;
+    display: block;
   }
 }
 
 .image-and-filters {
-  margin: 0 auto;
-  width: 80%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  font-family: 'Abel', sans-serif;
+  width: 50%;
+  padding: 35px;
+
+  .form-group {
+    text-align: right;
+    margin-right: 15%;
+
+    @media(max-width: 970px) {
+      text-align: center;
+      margin: 50px;
+      margin-right: 0;
+      margin-left: 0;
+    }
+  }
+
+  @media(max-width: 970px) {
+    width: 100%;
+  }
 }
 
-.profile-img {
-  margin-top: 30px;
+.big-img {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 35px;
+  width: 70%;
+}
+
+#change-img {
+  margin-top: 50px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.form-control-file {
+  display: none;
+}
+
+.change-img-label {
+  padding: 10px;
+  font-size: 1rem;
+  display: inline-block;
+  margin: 0 auto;
+
+  &:hover {
+    img.upload-grey {
+      display: none;
+    }
+
+    img.upload-white {
+      display: inline;
+    }
+  }
+
+  img {
+    background: transparent;
+
+    &.upload-white {
+      display: none;
+    }
+  }
 }
 
 .form-inner {
   width: 50%;
+  padding: 35px;
+
+  @media(max-width: 970px) {
+    width: 100%;
+  }
 }
 
 form {
-  background: #000;
-  color: #6D6875;
-  width: 90%;
-  height: 50vh;
+  width: 70%;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column;
-  font-family: 'Abel', sans-serif;
-
-  button {
-    padding: 10px;
-    width: 200px;
-    margin-top: 50px;
-    position: absolute;
-    right: 20%;
-    bottom: 15%;
-    display: flex;
-    justify-content: center;
-  }
 }
 
-.input-field{
-  width: 100%;
-  display: flex;
-  margin-bottom: 30px;
+.form-control {
+  font-family: 'Unica One', cursive;
+  color: #CC208E;
+  border-radius: 0;
+  padding: 10px;
+  background-color: #333333;
+}
 
-  .input-label {
-    font-weight: bolder;
-    margin-right: 50px;
-    text-align: left;
-    width: 30%;
-    color: #6D6875;
-    padding-top: 10px;
-  }
+label {
+  color: #6D6875;
+  font-family: 'Abel', sans-serif;
+}
 
-  .input {
-    font-family: 'Abel', sans-serif;
-    font-size: 1rem;
-    width: 70%;
-    border: none;
-    border-bottom: 1px solid #6D6875;
-    color: #CC208E;
-    padding: 10px;
+select {
+  -webkit-appearance: none;
+}
 
-    &:focus {
-      outline: transparent;
-    }
-  }
+.button-container {
+  text-align: right;
+}
 
-  select {
-    background: #FFF;
-    color: #CC208E;
-    margin-top: 30px;
-  }
+.btn.btn-secondary {
+  font-size: 1rem;
+  margin-top: 50px;
 }
 
 // -----------------> FILTERS
 
 .filters {
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .filters p {
-  color: red;
+  width: 100%;
+  font-family: 'Abel', sans-serif;
+  color: #6D6875;
 }
 
 .filter {
   width: 25%;
-  display: inline-block;
   border: 5px solid transparent;
+  position: relative;
 
   &:hover {
     cursor: pointer;
   }
 }
 
+.check-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  width: 60px;
+  height: 60px;
+  z-index: 8;
+  background: transparent;
+}
+
 .chosen {
-  border: 5px solid #CC208E;
+  .check-icon {
+    display: block;
+  }
 }
 
 .filters canvas, .filters img {
