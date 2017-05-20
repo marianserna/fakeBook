@@ -307,8 +307,7 @@ select {
   margin: 0 auto; }
 
 .imgWithFilter canvas {
-  width: 500px;
-  height: 500px; }
+  width: 500px; }
 
 .userInfo {
   width: 50%;
@@ -331,7 +330,8 @@ select {
   .userInfo .info-item {
     margin-bottom: 20px;
     opacity: 0;
-    transform: translateY(20%); }
+    transform: translateY(20%);
+    font-weight: lighter; }
   .userInfo .linkedin-profile {
     display: inline-block;
     margin: 0;

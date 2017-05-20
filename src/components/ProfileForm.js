@@ -7,7 +7,7 @@ import DesandroFilter from './DesandroFilter';
 import UnaFilter from './UnaFilter';
 
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { TweenMax, TimelineLite, Back, Power1 } from 'gsap';
+import { TweenMax, TimelineLite, Elastic } from 'gsap';
 
 export default class ProfileForm extends React.Component {
   constructor() {
@@ -107,10 +107,8 @@ export default class ProfileForm extends React.Component {
   }
 
   animateForm = () => {
-    const tl = new TimelineLite();
-    tl.
-      staggerFromTo('.form-inner .form-group', 3, {opacity: 0, y: 1000}, {opacity: 1, y: 0, ease: Back.easeOut.config(1.7)}, 0.1).
-      play();
+    TweenMax.from('.image-and-filters', 1, {x: '-200%', delay: 0.3, ease: Elastic.easeOut.config(0.2, 0.3)});
+    TweenMax.from('.form-inner', 1, {x: '200%', delay: 0.3, ease: Elastic.easeOut.config(0.2, 0.3)})
   }
 
   render() {

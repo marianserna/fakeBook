@@ -317,7 +317,6 @@ select {
 
 .imgWithFilter canvas {
   width: 500px;
-  height: 500px;
 }
 
 .userInfo {
@@ -349,6 +348,7 @@ select {
     margin-bottom: 20px;
     opacity: 0;
     transform: translateY(20%);
+    font-weight: lighter;
   }
 
   .linkedin-profile {
