@@ -1,16 +1,13 @@
 import React from 'react';
 import base from '../base';
+
 import CircleFilter from './CircleFilter';
 import TextFilter from './TextFilter';
 import DesandroFilter from './DesandroFilter';
 import UnaFilter from './UnaFilter';
+
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-
-
-// import { Button, Card, Row, Col } from './react-materializecss';
-
-// import { Link } from 'react-router-dom';
-import { TweenMax } from 'gsap';
+import { TweenMax, TimelineLite, Back, Power1 } from 'gsap';
 
 export default class ProfileForm extends React.Component {
   constructor() {
@@ -37,8 +34,10 @@ export default class ProfileForm extends React.Component {
         chosenFilter: data.filter || this.state.chosenFilter,
         title: data.title || this.state.title
       });
+      this.animateForm();
     });
   }
+
 
   onTitleChange = (e) => {
     this.setState({
@@ -107,6 +106,13 @@ export default class ProfileForm extends React.Component {
     return promise;
   }
 
+  animateForm = () => {
+    const tl = new TimelineLite();
+    tl.
+      staggerFromTo('.form-inner .form-group', 3, {opacity: 0, y: 1000}, {opacity: 1, y: 0, ease: Back.easeOut.config(1.7)}, 0.1).
+      play();
+  }
+
   render() {
     if (this.state.loading) {
       return(
@@ -139,25 +145,21 @@ export default class ProfileForm extends React.Component {
             <div className={`filter ${this.state.chosenFilter === 'circle' ? 'chosen' : ''}`} onClick={(e) => this.changeFilter(e, 'circle')}>
               <img src="check.svg" className="check-icon" alt="chosen filter"/>
               <CircleFilter photo={this.state.newImage || this.state.user.photo} />
-              <p>Circles</p>
             </div>
 
             <div className={`filter ${this.state.chosenFilter === 'text' ? 'chosen' : ''}`} onClick={(e) => this.changeFilter(e, 'text')}>
               <img src="check.svg" className="check-icon" alt="chosen filter"/>
               <TextFilter photo={this.state.newImage || this.state.user.photo} text={'Hello!'} />
-              <p>Hello</p>
             </div>
 
             <div className={`filter ${this.state.chosenFilter === 'una' ? 'chosen' : ''}`} onClick={(e) => this.changeFilter(e, 'una')}>
               <img src="check.svg" className="check-icon" alt="chosen filter"/>
               <UnaFilter photo={this.state.newImage || this.state.user.photo} />
-              <p>Css</p>
             </div>
 
             <div className={`filter ${this.state.chosenFilter === 'desandro' ? 'chosen' : ''}`} onClick={(e) => this.changeFilter(e, 'desandro')}>
               <img src="check.svg" className="check-icon" alt="chosen filter"/>
               <DesandroFilter photo={this.state.newImage || this.state.user.photo} />
-              <p>Desandro</p>
             </div>
           </div>
         </div>
