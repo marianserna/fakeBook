@@ -1,18 +1,32 @@
 import React, { Component } from 'react';
 import base from '../base';
-
 import { Link } from 'react-router-dom';
-// import { TweenMax } from 'gsap';
+
+import Logo from './Logo';
+
+import { TweenMax, Back } from 'gsap';
+import mojs from 'mo-js';
+import { Howl } from 'howler';
 
 export default class Landing extends Component {
   constructor() {
     super();
 
     this.provider = new base.auth.FacebookAuthProvider();
+
+    this.plop = new Howl({
+      src: ['/plop.mp3'],
+      volume: 0.2
+    });
   }
 
   componentWillMount() {
     this.handleFbResponse();
+  }
+
+  componentDidMount() {
+    this.bursting();
+    this.animateLanding();
   }
 
   redirectToFb = (e) => {
@@ -106,26 +120,61 @@ export default class Landing extends Component {
     });
   }
 
-  redirectToForm = () => {
-    this.props.history.push('/form');
+  applySound = () => {
+
   }
 
-  redirectToGrid = (e) => {
-    e.preventDefault();
-    this.props.history.push('/grid');
+  bursting = () => {
+    const burst = new mojs.Burst({
+      children: {
+        fill: '#CC208E'
+      }
+    });
+    burst.setSpeed(0.5).play();
+    this.plop.play();
+
+    setTimeout(() => {
+      const burst = new mojs.Burst({
+        left: '40%',
+        top: '40%',
+        children: {
+          fill: '#CC208E'
+        }
+      });
+      burst.setSpeed(0.5).play();
+      this.plop.play();
+    }, 500);
+
+    setTimeout(() => {
+      const burst = new mojs.Burst({
+        left: '60%',
+        top: '45%',
+        children: {
+          fill: '#CC208E'
+        }
+      });
+      burst.setSpeed(0.5).play();
+      this.plop.play();
+    }, 1000);
+  }
+
+  animateLanding = () => {
+    setTimeout(() => {
+      TweenMax.to('.links', 1, {opacity: 1, delay: 1, ease: Back.easeOut.config(1.7)});
+      TweenMax.to('.legend', 1, {opacity: 1, delay: 1.3, ease: Back.easeOut.config(1.7)});
+    }, 2500);
+  }
+
+  redirectToForm = () => {
+    this.props.history.push('/form');
   }
 
   render() {
     return (
       <div className="landing">
-        <div className="login">
-          <a className="join" href="#" onClick={(e) => this.redirectToGrid(e)}>
-            PROFILE
-          </a>
-        </div>
 
         <div className="fakebook">
-          <img className="logo" src="logo3.svg" alt="logo"/>
+          <Logo />
         </div>
 
         <div className="links">

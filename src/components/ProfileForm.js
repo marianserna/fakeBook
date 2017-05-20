@@ -127,7 +127,7 @@ export default class ProfileForm extends React.Component {
           <FormGroup>
             <Label htmlFor="change-img" className="change-img-label">
               <img src="upload.svg" className="upload-grey" alt="upload icon"/>
-              <img src="upload-white.svg" className="upload-white" alt="upload icon"/> 
+              <img src="upload-white.svg" className="upload-white" alt="upload icon"/>
               Upload Image
             </Label>
             <Input type="file" id="change-img" name="change-img" ref={(input) => this.newImage = input} onChange={(e) => this.changeImage(e)} />
@@ -139,21 +139,25 @@ export default class ProfileForm extends React.Component {
             <div className={`filter ${this.state.chosenFilter === 'circle' ? 'chosen' : ''}`} onClick={(e) => this.changeFilter(e, 'circle')}>
               <img src="check.svg" className="check-icon" alt="chosen filter"/>
               <CircleFilter photo={this.state.newImage || this.state.user.photo} />
+              <p>Circles</p>
             </div>
 
             <div className={`filter ${this.state.chosenFilter === 'text' ? 'chosen' : ''}`} onClick={(e) => this.changeFilter(e, 'text')}>
               <img src="check.svg" className="check-icon" alt="chosen filter"/>
               <TextFilter photo={this.state.newImage || this.state.user.photo} text={'Hello!'} />
+              <p>Hello</p>
             </div>
 
             <div className={`filter ${this.state.chosenFilter === 'una' ? 'chosen' : ''}`} onClick={(e) => this.changeFilter(e, 'una')}>
               <img src="check.svg" className="check-icon" alt="chosen filter"/>
               <UnaFilter photo={this.state.newImage || this.state.user.photo} />
+              <p>Css</p>
             </div>
 
             <div className={`filter ${this.state.chosenFilter === 'desandro' ? 'chosen' : ''}`} onClick={(e) => this.changeFilter(e, 'desandro')}>
               <img src="check.svg" className="check-icon" alt="chosen filter"/>
               <DesandroFilter photo={this.state.newImage || this.state.user.photo} />
+              <p>Desandro</p>
             </div>
           </div>
         </div>
@@ -162,12 +166,12 @@ export default class ProfileForm extends React.Component {
           <Form>
             <FormGroup>
               <Label htmlFor="name">Name</Label>
-              <Input type="text" id="name" name="name" defaultValue={this.state.user.name} required ref={(input) => this.name = input}/>
+              <Input type="text" id="name" name="name" defaultValue={this.state.user.name} required getRef={(input) => this.name = input}/>
             </FormGroup>
 
             <FormGroup>
               <Label htmlFor="description">Description</Label>
-              <Input type="text" id="description" name="description" defaultValue={this.state.user.description} required ref={(input) => this.description = input}/>
+              <Input type="text" id="description" name="description" defaultValue={this.state.user.description} required getRef={(input) => this.description = input}/>
             </FormGroup>
 
             <FormGroup>
@@ -180,7 +184,7 @@ export default class ProfileForm extends React.Component {
 
             <FormGroup>
               <Label htmlFor="linkedin">LinkedIn</Label>
-              <Input type="url" id="linkedin" name="linkedin" defaultValue={this.state.user.linkedin} required ref={(input) => this.linkedin = input}/>
+              <Input type="url" id="linkedin" name="linkedin" defaultValue={this.state.user.linkedin} required getRef={(input) => this.linkedin = input}/>
             </FormGroup>
 
             <div className="button-container">
