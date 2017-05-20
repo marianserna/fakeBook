@@ -71,7 +71,7 @@ export default class Profile extends React.Component {
         <div className="userInfo">
           <div className="info-container">
             <h1 className="info-item">{user.name}</h1>
-            <h3 className="info-item">{user.title}</h3>
+            <h3 className="info-item">{user.title.toUpperCase()}</h3>
             <p className="info-item">
               {user.description}
             </p>

@@ -1,5 +1,6 @@
 import React from 'react';
 import BreathingHalftone from '../BreathingHalftone';
+import photoUrl from '../photoUrl';
 
 export default class DesandroFilter extends React.Component {
   componentDidMount() {
@@ -23,7 +24,7 @@ export default class DesandroFilter extends React.Component {
 
   render() {
     return (
-      <img src={this.props.photo} alt="image" ref={(image) => this.image = image}/>
+      <img src={photoUrl(this.props.photo)} alt="image" ref={(image) => this.image = image}/>
     )
   }
 }

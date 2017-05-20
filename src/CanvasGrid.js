@@ -1,6 +1,7 @@
 import Hammer from 'hammerjs';
 import { TweenMax } from 'gsap';
 
+import photoUrl from './photoUrl';
 import click from './click';
 
 export default class CanvasGrid {
@@ -10,6 +11,7 @@ export default class CanvasGrid {
       users[key].id = key;
       return users[key];
     });
+
     this.redirectToProfile = redirectToProfile;
 
     this.canvas = document.createElement('canvas');
@@ -38,7 +40,7 @@ export default class CanvasGrid {
 
     this.images = this.users.map((user) => {
       const image = new Image();
-      image.src = user.photo;
+      image.src = photoUrl(user.photo);
       image.crossOrigin = "Anonymous";
       return image;
     });

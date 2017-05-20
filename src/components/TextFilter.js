@@ -1,5 +1,6 @@
 import React from 'react';
 import Filter from '../Filter';
+import photoUrl from '../photoUrl';
 
 export default class TextFilter extends React.Component {
   componentDidMount() {
@@ -20,7 +21,7 @@ export default class TextFilter extends React.Component {
   filterPhoto(photo) {
     const img = new Image();
     img.crossOrigin = "Anonymous";
-    img.src = photo;
+    img.src = photoUrl(photo);
 
     this.filter.filter(img);
   }
