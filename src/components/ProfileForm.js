@@ -134,7 +134,7 @@ export default class ProfileForm extends React.Component {
               <img src="upload-white.svg" className="upload-white" alt="upload icon"/>
               Upload Image
             </Label>
-            <Input type="file" id="change-img" name="change-img" ref={(input) => this.newImage = input} onChange={(e) => this.changeImage(e)} />
+            <Input type="file" id="change-img" name="change-img" getRef={(input) => this.newImage = input} onChange={(e) => this.changeImage(e)} />
           </FormGroup>
 
           <div className="filters">
