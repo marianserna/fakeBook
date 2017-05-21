@@ -20,6 +20,8 @@ export default class CanvasGrid {
     this.context = this.canvas.getContext('2d');
     this.gridContainer.appendChild(this.canvas);
 
+    this.gridStatus = 'playing';
+
     this.offset = {
       x: 0,
       y: 0
@@ -156,7 +158,9 @@ export default class CanvasGrid {
     this.context.clearRect(0, 0, window.innerWidth, window.innerHeight);
     this.drawImages();
     // this.grayscaling();
-    requestAnimationFrame(this.render);
+    if (this.gridStatus === 'playing') {
+      requestAnimationFrame(this.render);
+    }
   }
 
   drawImages = () => {
@@ -179,6 +183,10 @@ export default class CanvasGrid {
         gridImage.image, x, y, width, height
       );
     });
+  }
+
+  stopGrid = () => {
+    this.gridStatus = 'inactive';
   }
 
   // http://spyrestudios.com/html5-canvas-image-effects-black-white/
