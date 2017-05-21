@@ -295,6 +295,24 @@ select {
   width: 80vw;
   height: 100vh;
   margin: 0 auto;
+
+  @media(max-width: 970px) {
+    display: block;
+    width: 90vw;
+  }
+}
+
+.back-to-grid {
+  position: absolute;
+  top: 3%;
+  right: 4%;
+  color: #FFF;
+  transition: color 1s ease;
+
+  &:hover {
+    color: #CC208E;
+    text-decoration: none;
+  }
 }
 
 .profile p {
@@ -306,6 +324,12 @@ select {
   height: 500px;
   opacity: 0;
   transform: translateX(25%);
+
+  @media(max-width: 970px) {
+    margin-top: 150px;
+    width: 100%;
+    height: auto;
+  }
 }
 
 .imgWithFilter img {
@@ -317,6 +341,12 @@ select {
 
 .imgWithFilter canvas {
   width: 500px;
+
+  @media(max-width: 970px) {
+    display: block;
+    width: 300px;
+    margin: 0 auto;
+  }
 }
 
 .userInfo {
@@ -329,6 +359,12 @@ select {
 
   .info-container {
     width: 60%;
+
+    @media(max-width: 970px) {
+      width: 100%;
+      margin: 15px;
+      margin-top: 80px;
+    }
   }
 
   h1 {
@@ -355,6 +391,10 @@ select {
     display: inline-block;
     margin: 0;
     margin-top: 30px;
+  }
+
+  @media(max-width: 970px) {
+    width: 100%;
   }
 }
 

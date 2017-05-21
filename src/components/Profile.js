@@ -64,6 +64,10 @@ export default class Profile extends React.Component {
 
     return (
       <div className="profile">
+        <Link className="back-to-grid" to='/grid'>
+          GRID
+        </Link>
+
         <div className="imgWithFilter" ref={(div) => this.imgWithFilter = div}>
           {this.renderFilter(user.photo, user.filter)}
         </div>
