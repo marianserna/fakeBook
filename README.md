@@ -2,7 +2,7 @@
 
 Welcome to one of the most rewarding and challenging projects I've worked on! 🙏
 
-This project was built using React and Firebase. It was supposed to be a very simple project to try to understand how [Heed](http://heed.agency/) built the [Young Creatives](http://youngcreatives.heed.agency/) experience, particularly the infinite grid...It turned out not to be so simple. 
+This is not an original idea but rather a practice project. Originally, it was supposed to be a very simple project to try to understand how [Heed](http://heed.agency/) built the [Young Creatives](http://youngcreatives.heed.agency/) experience, particularly the infinite grid...It turned out not to be so simple. It is built with React and Firebase.
 
 The grid presented several challenges, better yet... the grid itself was a humongous challenge. Additionally, the fact that I was having CORS issues when an image is hosted on a different URL from my app's was so freaking annoying. I tried a couple suggested solutions but ended up having to build an express server and proxy to pretend that all images were being loaded from the same server and avoid this issue. Very frustrating.
 
