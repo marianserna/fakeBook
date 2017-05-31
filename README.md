@@ -22,3 +22,4 @@ Libraries/Packages used other than the already mentioned ones:
 
 xoxo!
 
+🥑🥑 Run it locally: Run node server + yarn run watch and yarn run build
