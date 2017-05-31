@@ -314,6 +314,7 @@ select {
   right: 4%;
   color: #FFF;
   z-index: 5000;
+  text-shadow: 1px 1px #333333;
   transition: color 1s ease; }
   .back-to-grid:hover, .back-home:hover {
     color: #CC208E;
