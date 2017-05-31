@@ -28,6 +28,10 @@ body {
 .fakebook svg {
   width: 400px;
   margin-bottom: 100px;
+
+  @media(max-width: 560px) {
+    width: 250px;
+  }
 }
 
 .cls-1 {
@@ -46,6 +50,18 @@ body {
 .links {
   display: flex;
   opacity: 0;
+
+  .enter, .join {
+    @media(max-width: 560px) {
+      display: block;
+      text-align: center;
+    }
+  }
+
+  @media(max-width: 560px) {
+    display: block;
+  }
+
 }
 
 .enter, .join, .btn.btn-secondary,
@@ -69,6 +85,8 @@ body {
     cursor: pointer;
   }
 }
+
+
 
 .login a {
   border: none;
@@ -103,6 +121,10 @@ body {
       text-decoration: none;
       color: #CC208E;
     }
+  }
+
+  @media(max-width: 560px) {
+    display: none;
   }
 }
 
@@ -302,11 +324,12 @@ select {
   }
 }
 
-.back-to-grid {
+.back-to-grid, .back-home {
   position: absolute;
   top: 3%;
   right: 4%;
   color: #FFF;
+  z-index: 5000;
   transition: color 1s ease;
 
   &:hover {

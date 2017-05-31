@@ -91,6 +91,9 @@ body {
 .fakebook svg {
   width: 400px;
   margin-bottom: 100px; }
+  @media (max-width: 560px) {
+    .fakebook svg {
+      width: 250px; } }
 
 .cls-1 {
   fill: #6d6875;
@@ -106,6 +109,13 @@ body {
 .links {
   display: flex;
   opacity: 0; }
+  @media (max-width: 560px) {
+    .links .enter, .links .join {
+      display: block;
+      text-align: center; } }
+  @media (max-width: 560px) {
+    .links {
+      display: block; } }
 
 .enter, .join, .btn.btn-secondary,
 .change-img-label, .linkedin-profile {
@@ -154,6 +164,9 @@ body {
     .legend p a {
       text-decoration: none;
       color: #CC208E; }
+  @media (max-width: 560px) {
+    .legend {
+      display: none; } }
 
 .form-container {
   display: flex;
@@ -295,13 +308,14 @@ select {
       display: block;
       width: 90vw; } }
 
-.back-to-grid {
+.back-to-grid, .back-home {
   position: absolute;
   top: 3%;
   right: 4%;
   color: #FFF;
+  z-index: 5000;
   transition: color 1s ease; }
-  .back-to-grid:hover {
+  .back-to-grid:hover, .back-home:hover {
     color: #CC208E;
     text-decoration: none; }
 
